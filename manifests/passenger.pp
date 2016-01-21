@@ -168,10 +168,11 @@ class puppet::passenger(
   }
 
   file { '/etc/puppet/rack':
-    ensure => directory,
-    owner  => $::puppet::params::puppet_user,
-    group  => $::puppet::params::puppet_group,
-    mode   => '0755',
+    ensure  => directory,
+    owner   => $::puppet::params::puppet_user,
+    group   => $::puppet::params::puppet_group,
+    mode    => '0755',
+    seltype => 'httpd_sys_content_t',
   }
 
   file { '/etc/puppet/rack/config.ru':
@@ -180,6 +181,7 @@ class puppet::passenger(
     group   => $::puppet::params::puppet_group,
     content => template('puppet/config.erb'),
     mode    => '0644',
+    seltype => 'httpd_sys_content_t',
   }
 
   ini_setting {'puppetmastersslclient':
